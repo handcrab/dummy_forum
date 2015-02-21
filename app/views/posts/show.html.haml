@@ -1,12 +1,21 @@
 %p#notice= notice
 
-%p
-  %b Title:
-  = @post.title
-%p
-  %b Content:
+%article
+  %h1= @post.title
+%p  
   = @post.content
 
-= link_to 'Edit', edit_post_path(@post)
-\|
-= link_to 'Back', posts_path
+%p.comments
+  - @post.comments.each do |comment|
+    %p
+      = time_ago_in_words comment.created_at
+      = comment.body
+
+  = form_for [@post, @post.comments.build] do |f|
+    = f.text_field :body
+    = f.submit
+    
+.btn-group
+  = link_to 'Edit', edit_post_path(@post), class: "btn btn-warning"  
+  = link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+  = link_to 'Back', posts_path, class: "btn btn-default"

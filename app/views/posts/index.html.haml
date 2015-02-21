@@ -2,12 +2,7 @@
 
 - @posts.each do |post|
   %article
-    %h1= post.title
-    %p= truncate post.content, length: 140
-    
-    .btn-group
-      %td= link_to 'Show', post, class: "btn btn-default"
-      %td= link_to 'Edit', edit_post_path(post), class: "btn btn-default"
-      %td= link_to 'Destroy', post, method: :delete, data: { :confirm => 'Are you sure?' }, class: "btn btn-default"
+    %h1= link_to post.title, post
+    %p= truncate post.content, length: 140    
 %hr
 = link_to 'New Post', new_post_path, class: "btn btn-success"

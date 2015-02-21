@@ -1,20 +1,30 @@
 !!!
 %html
   %head
-    %title Forum
+    %title Simple Forum
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
 
   %body 
-    %p.notice= notice
-    %p.alert= alert
+    %nav.navbar.navbar-inverse
+      - #.navbar-default 
+      .container 
+        .navbar-header
+          = link_to 'Simple Forum', root_path, class: 'navbar-brand'        
 
-    %p
-      - if user_signed_in?
-        %p= link_to 'sign out', destroy_user_session_path, method: :delete    
-      - else
-        %p= link_to 'sign in',  new_user_session_path
-        %p= link_to 'sign up',  new_user_registration_path
-
-    = yield
+        / %ul.nav.navbar-nav
+        /   %li= link_to 'Home', '#'
+        /   %li= link_to 'Home', '#'
+        %ul.nav.navbar-nav.navbar-right
+          - if user_signed_in?
+            %li= link_to 'Sign Out', destroy_user_session_path, method: :delete    
+          - else
+            %li= link_to 'Sign In',  new_user_session_path, class: 'sign-in'
+            %li= link_to 'Sign Up',  new_user_registration_path, class: 'sign-up'  
+            
+    .container    
+      .row
+        .col-md-8.col-md-push-2
+          = render 'shared/notice'
+          = yield

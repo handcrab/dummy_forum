@@ -4,10 +4,10 @@ class CommentsController < ApplicationController
     @comment = post.comments.build params.require(:comment).permit(:body, :user_id)
     @comment.user = current_user if current_user
 
-    flash[:notice] = if @comment.save
-      'Success'
+    if @comment.save
+      flash[:notice] = 'Success'
     else
-      'Fail'
+      flash[:alert]  = 'Fail'
     end
     redirect_to post
   end

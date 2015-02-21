@@ -1,8 +1,15 @@
-%h1 Listing posts
-
 - @posts.each do |post|
-  %article
+  %article.post.thumbnail
     %h1= link_to post.title, post
-    %p= truncate post.content, length: 140    
-%hr
+    %p.meta= raw meta_str post
+    
+    %p= content_preview post
+  
+    - unless post.comments.empty?
+      %p       
+        Replies
+        %span.badge= post.comments.count        
+        |
+        %span.meta= last_comment_meta_str post.comments.last
+
 = link_to 'New Post', new_post_path, class: "btn btn-success"

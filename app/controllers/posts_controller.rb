@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  # before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authorize_user, only: [:edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
@@ -10,21 +12,22 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    set_post
   end
 
   # GET /posts/new
   def new
-    @post = Post.new
+    @post = current_user.posts.build #Post.new
   end
 
   # GET /posts/1/edit
   def edit
   end
-  
+
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new post_params
+    @post = current_user.posts.build post_params
 
     respond_to do |format|
       if @post.save
@@ -65,10 +68,16 @@ class PostsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find params[:id]
+      # @post = current_user.posts.find_by id: params[:id] # 
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit :title, :content
+    end
+
+    def authorize_user
+      @post = current_user.posts.find_by id: params[:id]
+      redirect_to :back, notice: 'Not authorized' unless @post
     end
 end

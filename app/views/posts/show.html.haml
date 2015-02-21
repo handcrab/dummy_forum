@@ -1,21 +1,25 @@
-%p#notice= notice
-
 %article
   %h1= @post.title
-%p  
-  = @post.content
+  %p 
+    = @post.content
 
-%p.comments
-  - @post.comments.each do |comment|
-    %p
-      = time_ago_in_words comment.created_at
-      = comment.body
+  %p.comments
+    - @post.comments.each do |comment|
+      %p
+        = time_ago_in_words comment.created_at
+        by
+        - if comment.user
+          = link_to(comment.user.display_name, user_profile_path(comment.user.id)) 
+        - else 
+          anon
+      %p= comment.body
 
-  = form_for [@post, @post.comments.build] do |f|
-    = f.text_field :body
-    = f.submit
-    
-.btn-group
-  = link_to 'Edit', edit_post_path(@post), class: "btn btn-warning"  
-  = link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
-  = link_to 'Back', posts_path, class: "btn btn-default"
+    = form_for [@post, @post.comments.build] do |f|
+      = f.text_field :body
+      = f.submit
+
+  .btn-group
+    - #if current_user == @post.user
+    = link_to 'Edit', edit_post_path(@post), class: "btn btn-warning"  
+    = link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
+    = link_to 'Back', posts_path, class: "btn btn-default"

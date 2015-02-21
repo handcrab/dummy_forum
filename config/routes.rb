@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
+  get 'users/show'
+
   resources :posts do
     resource :comments, only: :create    
   end
+
   root 'posts#index'
+  devise_for :users
+
+  get 'users/:id' => 'users#show', as: :user_profile
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

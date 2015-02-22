@@ -7,12 +7,17 @@ module UsersHelper
     end
   end
 
-  def avatar_tag user, attributes={}
-    image_tag user.avatar || gravatar_url(user), attributes
+  def avatar_tag user, attributes={size: '25x25', class: 'avatar'}
+    avatar_url = if user
+      user.avatar || gravatar_url(user.email)
+    else
+      gravatar_url 'anon'
+    end
+    image_tag avatar_url, attributes
   end
 
-  def gravatar_url user
-    gravatar_id = Digest::MD5::hexdigest(user.email).downcase
+  def gravatar_url email
+    gravatar_id = Digest::MD5::hexdigest(email).downcase
     "http://gravatar.com/avatar/#{gravatar_id}.png"
     # image_tag 'http://placehold.it/260x180'
   end

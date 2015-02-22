@@ -1,3 +1,6 @@
-%article.thumbnail
-  %header.meta= link_to last_comment_meta_str(comment), "\##{comment.id}"
-  %p= comment.body
+%article.panel.panel-default
+  %header.panel-heading.meta
+    = avatar_tag comment.user    
+    = link_to last_comment_meta_str(comment), "\##{comment.id}"
+  %p.panel-body= comment.body
+

@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   get 'users/show'
 
   resources :posts do
-    resource :comments, only: :create    
+    resources :comments, only: :create do       
+      patch 'ban', to: 'comments#ban', on: :member      
+    end
   end
 
   root 'posts#index'

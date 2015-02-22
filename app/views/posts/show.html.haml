@@ -10,6 +10,6 @@
   %p= simple_format @post.content
 
   %section.comments
-    = render @post.comments
+    = render @post.comments.active
     = render 'comments/form', post: @post     
     = link_to 'Back', posts_path #, class: "btn btn-default"

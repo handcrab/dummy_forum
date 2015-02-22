@@ -8,7 +8,7 @@
     - unless post.comments.empty?
       %p       
         Replies
-        %span.badge= post.comments.count        
+        %span.badge= post.comments.active.count        
         |
         %span.meta= last_comment_meta_str post.comments.last
 

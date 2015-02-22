@@ -8,7 +8,7 @@
     %li
       Total comments
       %span.badge= @user.comments.count
-    %li registered: #{l @user.created_at, format: :short}
+    %li registered: #{formatted_date @user.created_at}
     %li= last_seen_div @user.last_sign_in_at
 
 

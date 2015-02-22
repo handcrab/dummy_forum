@@ -21,4 +21,13 @@ module UsersHelper
     "http://gravatar.com/avatar/#{gravatar_id}.png"
     # image_tag 'http://placehold.it/260x180'
   end
+
+  def activity_link activity
+    activity_path = if activity.is_a? Post
+      activity
+    else
+      "#{post_path activity.post}\##{activity.id}"
+    end
+    link_to activity.class.to_s, activity_path
+  end
 end

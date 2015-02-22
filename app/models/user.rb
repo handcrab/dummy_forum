@@ -11,7 +11,14 @@ class User < ActiveRecord::Base
     return get_name_from_mail if name.blank?
     name
   end
+  
+  def recent_activity
+    activity = []
+    activity.push comments.recent.to_a, posts.recent.to_a
+    activity.flatten.sort_by { |activity| activity.created_at }.reverse
 
+  end
+  
   private
   def get_name_from_mail
     email.match(/(.*?)@.*/)[1]

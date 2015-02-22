@@ -1,7 +1,19 @@
 %h1 #{@user.display_name.capitalize} Profile
 = avatar_tag @user, size: '100x100'
 .user-stats
-  %p registered: #{l @user.created_at, format: :short}
-  = last_seen_div @user.last_sign_in_at
+  %ul
+    %li 
+      Total posts
+      %span.badge= @user.posts.count
+    %li
+      Total comments
+      %span.badge= @user.comments.count
+    %li registered: #{l @user.created_at, format: :short}
+    %li= last_seen_div @user.last_sign_in_at
 
-= link_to 'Back to posts', posts_path
+
+%h2 Recent activity
+- @user.recent_activity.each do |activity|
+  %p
+    = activity_link activity 
+    %span= formatted_date activity.created_at

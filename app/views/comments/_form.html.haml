@@ -1,4 +1,5 @@
 = simple_form_for [post, post.comments.build] do |f|
-  = f.input :body, required: true, label: false
+  = f.input :body, required: true, label: false, as: :ckeditor, input_html: { ckeditor: {toolbar: 'simple'} }
+
   %br
   = f.submit 'Reply', class: "btn btn-success comment-reply"

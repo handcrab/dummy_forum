@@ -24,5 +24,7 @@ module Forum
     config.active_record.raise_in_transactional_callbacks = true
 
     config.sass.preferred_syntax = :sass
+
+    config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
   end
 end

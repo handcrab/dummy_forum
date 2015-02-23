@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   get 'users/show'
 
   resources :posts do
@@ -8,9 +9,11 @@ Rails.application.routes.draw do
   end
 
   root 'posts#index'
-  devise_for :users
 
+  devise_for :users
   get 'users/:id' => 'users#show', as: :user_profile
+
+  # mount Ckeditor::Engine => '/ckeditor'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

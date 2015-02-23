@@ -2,14 +2,20 @@
 = avatar_tag @user, size: '100x100'
 .user-stats
   %ul
-    %li 
+    %li
+      %span.glyphicon.glyphicon-comment(aria-hidden="true") 
       Total posts
       %span.badge= @user.posts.count
     %li
+      %span.glyphicon.glyphicon-comment(aria-hidden="true")      
       Total comments
       %span.badge= @user.comments.count
-    %li registered: #{formatted_date @user.created_at}
-    %li= last_seen_div @user.last_sign_in_at
+    %li 
+      %span.glyphicon.glyphicon-calendar(aria-hidden="true")
+      registered: #{formatted_date @user.created_at}
+    %li
+      %span.glyphicon.glyphicon-calendar(aria-hidden="true")
+      = last_seen_tag @user.last_sign_in_at, :span
 
 
 %h2 Recent activity

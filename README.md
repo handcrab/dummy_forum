@@ -1,9 +1,14 @@
 # Dummy forum app #learning
 
-Features:
+## Features
 - Users can create posts
   - they can modify only their posts
-- Post's author can ban comments for his post  
+- Authors can ban comments on their posts  
 - Everyone can comment posts
 - Everyone can see other user profiles
-  - In the user profile everyone can see user's last activities: posts, comments
+  - In the user profile everyone can see user's last activities: posts and comments
+
+## TODO
+- add Categories to posts (tree-categories)
+- Improve UX: 
+  - ban comments via axaj

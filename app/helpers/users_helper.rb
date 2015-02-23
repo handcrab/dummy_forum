@@ -1,9 +1,9 @@
 module UsersHelper
-  def last_seen_div date, attributes={}, &block
+  def last_seen_tag date, tag=:div ,attributes={}, &block
     if date
       formatted_date = l date, format: :short
       msg = "last seen: #{formatted_date}"
-      content_tag :div, msg, attributes, &block
+      content_tag tag, msg, attributes, &block
     end
   end
 

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :posts
-  has_many :comments #, through: :posts
+  has_many :comments
 
   def display_name
     return get_name_from_mail if name.blank?
@@ -13,10 +13,10 @@ class User < ActiveRecord::Base
   end
   
   def recent_activity
-    activity = []
-    activity.push comments.recent.to_a, posts.recent.to_a
-    activity.flatten.sort_by { |activity| activity.created_at }.reverse
-
+    # TODO ??? comments.recent.to_a
+    activities = []
+    activities.push comments.recent.to_a, posts.recent.to_a
+    activities.flatten.sort_by { |activity| activity.created_at }.reverse
   end
   
   private

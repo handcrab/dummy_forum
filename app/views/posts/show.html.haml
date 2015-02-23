@@ -1,15 +1,22 @@
-%article
-  .btn-group
-    - if current_user == @post.user
-      = link_to 'Edit', edit_post_path(@post), class: "btn btn-warning"  
-      = link_to 'Destroy', @post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger"
-
+%article.post
   %header
     %h1= @post.title
-    %p.meta= raw meta_str @post 
+      
+    %p.meta
+      = raw meta_str @post 
+
+    - if current_user == @post.user
+      .btn-group
+        = link_to edit_post_path(@post), {class: "btn btn-warning btn-xs"} do
+          %span.glyphicon.glyphicon-pencil(aria-hidden="true")
+          Edit
+        = link_to @post, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" do
+          %span.glyphicon.glyphicon-remove(aria-hidden="true")
+          Destroy
+
   %p= simple_format @post.content
 
   %section.comments
     = render @post.comments.active
     = render 'comments/form', post: @post     
-    = link_to 'Back', posts_path #, class: "btn btn-default"
+    = link_to 'Back to posts', posts_path, class: 'btn back'

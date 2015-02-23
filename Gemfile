@@ -38,6 +38,7 @@ gem 'simple_form'
 gem 'devise'
 gem 'hirb', group: :development # Hirb.enable
 gem 'ckeditor'
+gem "recaptcha", require: "recaptcha/rails", github: 'ambethia/recaptcha'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

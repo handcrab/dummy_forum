@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
   before_action :set_post
   before_action :check_user, only: :ban
+  before_action :verify_captcha, only: :create
+
   # POST
   def create
     # post = Post.find params[:post_id]
@@ -33,6 +35,12 @@ class CommentsController < ApplicationController
   def check_user
     unless current_user == @post.user
       redirect_to @post, alert: 'Only author of the post can ban comments'
+    end
+  end
+
+  def verify_captcha
+    unless current_user
+      redirect_to @post, alert: 'go away, bloody robot!' unless verify_recaptcha
     end
   end
 end

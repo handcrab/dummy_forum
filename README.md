@@ -4,6 +4,7 @@
 - Users can create posts
   - they can modify only their posts  
 - Everyone can comment posts
+- recaptcha
 - WYSIWYG editor
 - Authors can ban comments on their posts  
 - Everyone can see user profiles
@@ -13,3 +14,4 @@
 - add Categories to posts (tree-categories)
 - Improve UX: 
   - ban comments via axaj
+  - require recaptcha field (client-side check)

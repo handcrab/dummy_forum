@@ -2,4 +2,6 @@
   = f.input :body, required: true, label: false, as: :ckeditor, input_html: { ckeditor: {toolbar: 'simple'} }
 
   %br
+  = recaptcha_tags unless current_user
+  %br
   = f.submit 'Reply', class: "btn btn-success comment-reply"

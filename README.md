@@ -10,6 +10,9 @@
 - Everyone can see user profiles
   - In the user profile everyone can see user's last activities: posts and comments
 
+## Setup
+Add your recaptcha keys to `/config/initializers/recaptcha.rb`
+
 ## TODO
 - add Categories to posts (tree-categories)
 - Improve UX: 
